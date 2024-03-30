@@ -1,14 +1,20 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, ViewStyle, StyleProp } from 'react-native';
 import { formatSec, secToMin } from '../utils/time';
 import Workout from '../types/data';
+import { ReactNode } from 'react';
+import { StyleProps } from 'react-native-reanimated';
 
-export default function WorkoutItem({item} : { item : Workout}) {
+export default function WorkoutItem({item, children, childStyles = {}} : { item : Workout, children?: ReactNode, childStyles? :StyleProp<ViewStyle> }) {
 
   return (
      <View style={styles.container}>
          <Text style={styles.name}>{item.name}</Text>
          <Text style={styles.difficulty}>Time: {formatSec(item.duration)}</Text>
          <Text style={styles.difficulty}>{item.difficulty}</Text>
+
+         {
+           children && <View style={childStyles}>{children}</View>
+         }
      </View>
   );
 }

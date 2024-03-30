@@ -9,24 +9,12 @@ import Workout from './../types/data'
 //custom components
 import { MontserratText } from '../components/styled/MontserratText';
 import { getWorkouts } from '../storage/workout';
+import { useWorkouts } from '../hooks/useWorkouts';
 
 export default function HomeScreen({navigation} : NativeStackHeaderProps) {
 
-    const [workouts , setWorkouts] = useState<Workout[]>([]);
 
-    useEffect( () => {
-      console.log("initialized HomeScreen..");
-
-      async function getData(){
-        const _workouts = await getWorkouts();
-        setWorkouts(_workouts);
-      }
-
-      getData();
-
-      return () =>  console.log("Unmounting activity HomeScreen..");
-
-    }, [])
+  const workouts = useWorkouts();
 
   return (
     <View style={styles.container}>

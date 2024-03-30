@@ -15,6 +15,15 @@ export const initWorkout = async () :Promise<boolean> =>{
     return false;
 }
 
+export const getWorkoutsBySlug = async (slug: string) : Promise<Workout>=>{
+
+    const Workouts = await getData("workout-data");
+    const workoutFound = Workouts.filter(  (w : Workout) => w.slug === slug)[0];
+
+    console.log("found: "+ workoutFound);
+    return workoutFound;
+}
+
 export const getWorkouts = async () : Promise<Workout[]>=>{
 
     const Workouts = await getData("workout-data");
