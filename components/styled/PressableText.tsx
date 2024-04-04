@@ -26,6 +26,4 @@ const styles = StyleSheet.create({
    fontFamily: "montserrat-bold",
    textDecorationLine: 'underline'
   }
-
-
 })

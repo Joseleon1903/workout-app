@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, ViewStyle, StyleProp } from 'react-native';
 import { formatSec, secToMin } from '../utils/time';
 import Workout from '../types/data';
 import { ReactNode } from 'react';
-import { StyleProps } from 'react-native-reanimated';
 
 export default function WorkoutItem({item, children, childStyles = {}} : { item : Workout, children?: ReactNode, childStyles? :StyleProp<ViewStyle> }) {
 
@@ -37,6 +36,4 @@ const styles = StyleSheet.create({
       difficulty: {
               fontSize: 15
       }
-
-
 })

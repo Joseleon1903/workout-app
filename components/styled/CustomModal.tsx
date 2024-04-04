@@ -23,7 +23,7 @@ export function CustomModal({
     return (
         <>
         <Modal visible={isModalVisible}
-            transparent={true}
+            transparent={false}
             animationType='slide'> 
 
             <View style={styles.centerView}>
