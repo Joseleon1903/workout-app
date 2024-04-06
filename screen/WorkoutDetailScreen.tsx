@@ -24,20 +24,37 @@ export default function WorkoutDetailScreen({ route} : NativeStackHeaderProps & 
   const workout = useWorkoutBySlug(route.params.slug);
   const [trackerIdx, setTrackerIdx]= useState(-1);
 
-  const countDown = useCountDown(
-    trackerIdx,
-    trackerIdx>= 0 ?sequence[trackerIdx].duration : -1
-  )
+  const {countDown, isRunning, stop, start} = useCountDown(
+    trackerIdx
+    );
+
+  useEffect(() =>{
+    console.log("Detail Screen : ", countDown);
+
+    if(!workout){return ;}
+
+    if(trackerIdx === workout.sequence.length -1){return;}
+
+    if(countDown === 0 ){
+      addItemToSequence(trackerIdx + 1);
+    }
+
+
+  }, [countDown])
 
   const addItemToSequence= (indx : number) =>{
-    setSequence([...sequence, workout!.sequence[indx]]);
+    const newSequence = [...sequence, workout!.sequence[indx]];
+    setSequence(newSequence);
     setTrackerIdx(indx);
+    start(newSequence[indx].duration);
   }
 
 
   if(!workout){
     return null;
   }
+
+  const hasReachedEnd = sequence.length === workout.sequence.length && countDown === 0
 
    
   return (
@@ -64,7 +81,7 @@ export default function WorkoutDetailScreen({ route} : NativeStackHeaderProps & 
                  
                 </View>
 
-           )
+             )
             }
           </View>
         </CustomModal>
@@ -72,22 +89,53 @@ export default function WorkoutDetailScreen({ route} : NativeStackHeaderProps & 
 
       </WorkoutItem>
 
-      <View>
+      <View style={styles.centerView}>
 
-            {sequence.length ===0 &&
+            {sequence.length ===0 ?
 
             <FontAwesome name="play-circle-o" 
                          size={100}
                          onPress={() => addItemToSequence(0)}
             
-            ></FontAwesome>
+            />
+            :
+            isRunning ? 
+            <FontAwesome name="stop-circle-o" 
+            size={100}
+            onPress={() => stop()}/>
+            :
+            <FontAwesome name="play-circle-o" 
+                         size={100}
+                         onPress={() => {
+                          if(hasReachedEnd){
+                            console.log("Restart Counter");
+                          }else{
+                            start(countDown);
+                          }
+                         }}
+            
+            />
+
+            }
+
+            {
+              sequence.length > 0 && countDown >= 0 &&
+
+              <View>
+                <Text style={ {fontSize: 60}}> {countDown}</Text>
+              </View>
             }
       </View>
 
-      
+      <View style={{alignItems: 'center'}}>
 
-     
- 
+        <Text style={{fontSize:60, fontWeight: 'bold'}}>
+          {
+            sequence.length === 0 ? "Prepared" : hasReachedEnd? "Great Job!": sequence[trackerIdx].name
+          } 
+        </Text>
+      </View>
+
 
     </View>
   );
@@ -105,6 +153,13 @@ const styles = StyleSheet.create({
     },
     sequenceItem:{
       alignItems: 'center'
+
+    },
+    centerView:{
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      marginBottom: 20
 
     }
 
