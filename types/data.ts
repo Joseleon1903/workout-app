@@ -1,6 +1,6 @@
 
 export type Difficulty = "easy" | "normal"| "hard"
-export type SequenceType = "exercise" | "stretch"| "break"
+export type SequenceType = "Exercise" | "Stretch"| "Break"
 
 export default interface Workout{
     slug : string,

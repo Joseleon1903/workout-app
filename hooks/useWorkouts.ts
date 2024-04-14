@@ -4,28 +4,23 @@ import { getWorkouts } from "../storage/workout";
 
 import { useIsFocused } from "@react-navigation/native";
 
-export const useWorkouts = () =>{
+export const useWorkouts = () => {
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
 
-    const [workouts , setWorkouts] = useState<Workout[]>([]);
+  const isFocused = useIsFocused();
 
-    const isFocused = useIsFocused();
+  useEffect(() => {
+    console.log("initialized useWorkouts..");
 
-    useEffect( () => {
-        console.log("initialized useWorkouts..");
+    async function getData() {
+      const _workouts = await getWorkouts();
+      setWorkouts(_workouts);
+    }
 
-        async function getData(){
-          const _workouts = await getWorkouts();
-          setWorkouts(_workouts);
-        }
+    if (isFocused) {
+      getData();
+    }
+  }, [isFocused]);
 
-        if(isFocused){
-            getData();
-        }
-  
-    
-      }, [isFocused]);
-
-
-      return workouts;
-
-}
+  return workouts;
+};

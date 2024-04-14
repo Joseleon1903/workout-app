@@ -1,13 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-
 export function MontserratText({children} : {children : React.ReactNode}) {
  
       return (
         <Text style={styles.header}> {children}</Text>
       );
-  
     
   }
 
