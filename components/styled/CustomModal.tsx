@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Pressable, StyleSheet, Text, Modal, View } from 'react-native';
+import { StyleSheet, Text, Modal, View } from 'react-native';
 import { PressableText } from './PressableText';
 
 
