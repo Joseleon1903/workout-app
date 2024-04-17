@@ -1,5 +1,5 @@
 
-export type Difficulty = "easy" | "normal"| "hard"
+export type Difficulty = "Easy" | "Normal"| "Hard"
 export type SequenceType = "Exercise" | "Stretch"| "Break"
 
 export default interface Workout{

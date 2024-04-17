@@ -53,7 +53,7 @@ return (
     <BottomTab.Navigator initialRouteName="Home">
             <BottomTab.Screen name="Home"
                           component={HomeScreen}
-                          options={{unmountOnBlur : true,
+                          options={{unmountOnBlur : false,
                                     tabBarIcon: () =><AntDesign name="appstore1" size={24} color="black" />
                               }}/>
 
