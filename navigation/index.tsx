@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { View, Text, ColorSchemeName } from 'react-native';
+import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AntDesign } from '@expo/vector-icons';
@@ -11,11 +11,11 @@ import HomeScreen from './../screen/HomeScreen'
 import PlannerScreen from './../screen/PlannerScreen'
 import WorkoutDetailScreen from '../screen/WorkoutDetailScreen';
 
-export default function Navigation() {
+export default function Navigation({colorScheme} : {colorScheme : ColorSchemeName}) {
 
 return (
 
-  <NavigationContainer>
+  <NavigationContainer  theme={colorScheme === 'light' ? DefaultTheme : DarkTheme}>
 
    <RootNavigator/>
 
@@ -53,7 +53,7 @@ return (
     <BottomTab.Navigator initialRouteName="Home">
             <BottomTab.Screen name="Home"
                           component={HomeScreen}
-                          options={{unmountOnBlur : true,
+                          options={{unmountOnBlur : false,
                                     tabBarIcon: () =><AntDesign name="appstore1" size={24} color="black" />
                               }}/>
 

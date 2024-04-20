@@ -72,20 +72,24 @@ export default function WorkoutDetailScreen({
             );
           }}
         >
-          <View>
-            {workout.sequence.map((si, indx) => (
-              <View key={si.slug} style={styles.sequenceItem}>
-                <Text>
-                  {" "}
-                  {si.name} | {si.type} | {formatSec(si.duration)}
-                </Text>
 
-                {indx !== workout.sequence.length - 1 && (
-                  <FontAwesome name="arrow-down" size={20}></FontAwesome>
-                )}
-              </View>
-            ))}
-          </View>
+          { ()=>
+                <View>
+                  {workout.sequence.map((si, indx) => (
+                    <View key={si.slug} style={styles.sequenceItem}>
+                      <Text>
+                        {" "}
+                        {si.name} | {si.type} | {formatSec(si.duration)}
+                      </Text>
+
+                      {indx !== workout.sequence.length - 1 && (
+                        <FontAwesome name="arrow-down" size={20}></FontAwesome>
+                      )}
+                    </View>
+                  ))}
+                </View>
+          }
+          
         </CustomModal>
       </WorkoutItem>
 
